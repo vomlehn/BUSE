@@ -1,5 +1,5 @@
 TARGET		:= busexmp loopback
-LIBOBJS 	:= buse.o
+LIBOBJS 	:= buse.o buse-async.o
 OBJS		:= $(TARGET:=.o) $(LIBOBJS)
 STATIC_LIB	:= libbuse.a
 
@@ -13,7 +13,7 @@ all: $(TARGET)
 $(TARGET): %: %.o $(STATIC_LIB)
 	$(CC) -o $@ $< $(LDFLAGS)
 
-$(TARGET:=.o): %.o: %.c buse.h
+$(TARGET:=.o): %.o: %.c buse.h buse-async.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(STATIC_LIB): $(LIBOBJS)
